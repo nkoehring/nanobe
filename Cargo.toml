@@ -1,0 +1,7 @@
+[package]
+name = "nanobe"
+version = "0.1.0"
+authors = ["koehr"]
+
+[dependencies]
+pencil = "0.3.0"

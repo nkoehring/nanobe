@@ -1,0 +1,40 @@
+./wrk -t12 -c400 -d30s http://127.0.0.1:8000/index.html
+
+python -m http.server
+=====================
+
+Running 30s test @ http://127.0.0.1:8000/index.html
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     6.54ms   58.79ms   1.68s    99.02%
+    Req/Sec   377.97    353.45     1.93k    77.32%
+  35125 requests in 30.09s, 6.87MB read
+  Socket errors: connect 154, read 0, write 0, timeout 52
+Requests/sec:   1167.16
+Transfer/sec:    233.67KB
+
+rocket.rs
+=========
+
+Running 30s test @ http://localhost:8000/
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   760.53us    2.17ms  26.64ms   95.11%
+    Req/Sec     7.79k   389.04     8.53k    69.44%
+  233234 requests in 30.09s, 32.47MB read
+  Socket errors: connect 0, read 0, write 0, timeout 6
+Requests/sec:   7751.06
+Transfer/sec:      1.08MB
+
+pencil
+======
+
+Running 30s test @ http://localhost:8000/
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    51.30us   49.48us  33.18ms   99.85%
+    Req/Sec   177.92k     3.21k  181.55k    89.37%
+  5326425 requests in 30.07s, 650.20MB read
+Requests/sec: 177131.57
+Transfer/sec:     21.62MB
+
