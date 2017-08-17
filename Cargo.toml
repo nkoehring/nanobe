@@ -1,7 +1,8 @@
 [package]
 name = "nanobe"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["koehr"]
 
 [dependencies]
-pencil = "0.3.0"
+rocket = "0.3.2"
+rocket_codegen = "0.3.2"

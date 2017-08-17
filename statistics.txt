@@ -16,15 +16,40 @@ Transfer/sec:    233.67KB
 rocket.rs
 =========
 
-Running 30s test @ http://localhost:8000/
+Running 30s test @ http://localhost:1337/simple
   12 threads and 400 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency   760.53us    2.17ms  26.64ms   95.11%
-    Req/Sec     7.79k   389.04     8.53k    69.44%
-  233234 requests in 30.09s, 32.47MB read
-  Socket errors: connect 0, read 0, write 0, timeout 6
-Requests/sec:   7751.06
-Transfer/sec:      1.08MB
+    Latency    32.37us   11.17us   4.05ms   98.62%
+    Req/Sec   214.74k     8.07k  220.96k    87.38%
+  6431494 requests in 30.07s, 0.87GB read
+Requests/sec: 213900.55
+Transfer/sec:     29.58MB
+
+
+Tera Template
+-------------
+
+Running 30s test @ http://localhost:1337/
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    48.71us    1.97ms 518.95ms   99.99%
+    Req/Sec   197.77k     9.54k  206.44k    85.05%
+  5924186 requests in 30.06s, 1.49GB read
+Requests/sec: 197070.84
+Transfer/sec:     50.74MB
+
+Bart Template
+-------------
+
+Running 30s test @ http://localhost:1337/bart
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    34.73us   12.69us   5.70ms   96.62%
+    Req/Sec   208.32k    13.72k  220.14k    80.07%
+  6240377 requests in 30.07s, 1.57GB read
+Requests/sec: 207533.72
+Transfer/sec:     53.64MB
+
 
 pencil
 ======
