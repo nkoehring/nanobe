@@ -1,0 +1,4 @@
+hard_tabs = false
+normalize_comments = false
+match_block_trailing_comma = true
+format_strings = true

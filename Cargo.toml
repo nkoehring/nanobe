@@ -1,8 +1,23 @@
 [package]
 name = "nanobe"
 version = "0.0.1"
-authors = ["koehr"]
+authors = ["koehr <n@koehr.in>"]
+license = "MIT"
+description= "NANOBE aint no ordinary blog engine"
+readme = "README.md"
+categories = ["weblog", "blog-engine", "text-processing"]
+keywords = ["static", "website", "weblog", "blog", "markdown", "ssr", "web"]
+repository = "https://github.com/nkoehring/nanobe"
+homepage = "https://github.com/nkoehring/nanobe"
 
 [dependencies]
 rocket = "0.3.2"
 rocket_codegen = "0.3.2"
+clap = "2"
+walkdir = "1"
+slug = "0.1.2"
+comrak = "0.1.6"
+rayon = "0.8.2"
+notify = "4.0.0"
+error-chain = "0.10.0"
+chrono = "0.4.0"
