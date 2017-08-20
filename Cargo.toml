@@ -5,7 +5,7 @@ authors = ["koehr <n@koehr.in>"]
 license = "MIT"
 description= "NANOBE aint no ordinary blog engine"
 readme = "README.md"
-categories = ["weblog", "blog-engine", "text-processing"]
+categories = ["weblog", "blog-engine", "text-processing", "command-line-utilities"]
 keywords = ["static", "website", "weblog", "blog", "markdown", "ssr", "web"]
 repository = "https://github.com/nkoehring/nanobe"
 homepage = "https://github.com/nkoehring/nanobe"
@@ -13,11 +13,22 @@ homepage = "https://github.com/nkoehring/nanobe"
 [dependencies]
 rocket = "0.3.2"
 rocket_codegen = "0.3.2"
-clap = "2"
-walkdir = "1"
 slug = "0.1.2"
+tera = "0.10.9"
 comrak = "0.1.6"
 rayon = "0.8.2"
 notify = "4.0.0"
-error-chain = "0.10.0"
 chrono = "0.4.0"
+slog = "2.0.6"
+sloggers = "0.2.0"
+glob = "0.2.11"
+
+[dependencies.rocket_contrib]
+version = "*"
+default-features = false
+features = ["tera_templates"]
+
+[dependencies.clap]
+version = "2.25.0"
+default-features = false
+features = [ "wrap_help", "color" ]
