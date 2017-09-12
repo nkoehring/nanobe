@@ -6,15 +6,18 @@
 // extern crate rayon;
 // extern crate notify;
 // extern crate slug;
-// extern crate chrono;
 
+#[macro_use] extern crate bart_derive;
+#[macro_use] extern crate serde_derive;
+#[macro_use] extern crate slog;
+extern crate sloggers;
+extern crate serde;
+extern crate serde_yaml;
+extern crate serde_json;
 extern crate clap;
 extern crate comrak;
 extern crate glob;
-#[macro_use]
-extern crate slog;
-extern crate sloggers;
-extern crate tera;
+extern crate chrono;
 
 
 // use rocket_contrib::Template;
@@ -22,10 +25,13 @@ extern crate tera;
 
 mod logger;
 mod nanobe {
+  pub mod article;
   pub mod build;
+  pub mod template;
 }
 
 use nanobe::build::build;
+use nanobe::template::test;
 
 // Cargo.toml variables for default info
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
@@ -49,11 +55,15 @@ fn main() {
         .arg(&source_arg)
         .arg(&destination_arg);
 
+    let template_cmd = clap::SubCommand::with_name("template")
+        .about("render template test");
+
     let matches = clap::App::new("NANOBE")
         .about(ABOUT.unwrap_or_else(|| "a blog engine"))
         .author(AUTHORS.unwrap_or_else(|| "koehr <n@koehr.in>"))
         .version(VERSION.unwrap_or_else(|| "dev"))
         .subcommand(build_cmd)
+        .subcommand(template_cmd)
         .setting(clap::AppSettings::SubcommandRequiredElseHelp)
         .setting(clap::AppSettings::InferSubcommands)
         .setting(clap::AppSettings::VersionlessSubcommands)
@@ -70,6 +80,9 @@ fn main() {
           let dest = &m.value_of("DESTDIR").unwrap_or("html");
           info!(logger, "building from {} into {}", src, dest);
           build(src, dest)
+      },
+      ("template", Some(_)) => {
+          test()
       },
       _ => {}
     }
