@@ -3,11 +3,12 @@ use glob::glob;
 use std::path::{Path, PathBuf};
 use std::fs::File;
 use std::io::{Read, BufReader, Error};
+use rayon::prelude::*;
 
 use nanobe::article::Article;
 
 
-fn render_file(input_path: PathBuf, output_dir: &Path) -> Result<String, Error> {
+fn render_file(input_path: &PathBuf, output_dir: &Path) -> Result<String, Error> {
   let file_name = String::from(input_path.file_name().unwrap().to_string_lossy());
   let file = File::open(input_path)?;
   let mut file_reader = BufReader::new(file);
@@ -37,10 +38,10 @@ pub fn build(input_dir: &str, output_dir: &str) {
     let input_files: Vec<_> = glob(&pattern).unwrap().filter_map(Result::ok).collect();
     info!(logger, "found {} items in '{}'", input_files.len(), input_dir.display());
 
-    for path in input_files {
+    input_files.par_iter().for_each(|path| {
       match render_file(path, output_dir) {
         Ok(file_name) => info!(logger, "Rendered {}", file_name),
         Err(err) => error!(logger, "{}", err)
       }
-    }
+    })
 }

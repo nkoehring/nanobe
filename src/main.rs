@@ -3,7 +3,6 @@
 // #![plugin(rocket_codegen)]
 // extern crate rocket;
 // extern crate rocket_contrib;
-// extern crate rayon;
 // extern crate notify;
 // extern crate slug;
 
@@ -18,6 +17,7 @@ extern crate clap;
 extern crate comrak;
 extern crate glob;
 extern crate chrono;
+extern crate rayon;
 
 
 // use rocket_contrib::Template;
