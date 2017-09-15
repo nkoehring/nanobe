@@ -1,0 +1,4 @@
+50000 markdown files, ~200MB
+
+sequencial> ./target/release/nanobe build iotest/src iotest/dest  2.11s user 2.21s system 99% cpu 4.368 total
+parallel  > ./target/release/nanobe build iotest/src iotest/dest  2.81s user 2.49s system 549% cpu 0.966 total
