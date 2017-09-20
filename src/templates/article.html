@@ -2,7 +2,7 @@
 <html lang="{{ lang }}">
 <head>
   <meta charset="UTF-8">
-  <title>{{ article.title }} — {{ website.title }}</title>
+  <title>{{ title }} — {{ website.title }}</title>
   {{ metatags }}
 </head>
 <body>
@@ -10,28 +10,26 @@
     <h1>{{ website.header }}</h1>
   </header>
 
-  {{#article.}}
   <article>
     <header>
-      <h1>{{ .title }}</h1>
-      <p>{{ .abstract }}</p>
+      <h1>{{ title }}</h1>
+      <p>{{ abstract }}</p>
     </header>
 
     <aside>
-      <p>Category: {{ .category }}</p>
+      <p>Category: {{ category }}</p>
       <ul>
-        {{#.tags}}
+        {{#tags}}
         <li>{{ . }}</li>
         {{/tags}}
       </ul>
     </aside>
 
     <div id="content">
-      {{{ .content }}}
+      {{{ content }}}
     </div
 
   </article>
-  {{/article}}
 
   <footer>
     <p>{{ website.footer }}</p>

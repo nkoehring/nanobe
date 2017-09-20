@@ -4,10 +4,13 @@
 use std::fs::File;
 use std::path::{Path, PathBuf};
 use std::io::{Write, Error};
+use std::sync::Arc;
 use serde_yaml;
 use serde_json;
 use chrono::Local;
 use comrak::{markdown_to_html, ComrakOptions};
+
+use nanobe::website::Website;
 
 
 fn find_yaml_block(text: &str) -> Option<(usize, usize, usize)> {
@@ -35,6 +38,7 @@ fn default_created_at() -> i64 { Local::now().timestamp() }
 fn default_content() -> String { "no content".into() }
 
 #[derive(Serialize, Deserialize, Debug)]
+// #[template = "src/templates/article.html"]
 pub struct Article {
   #[serde(default = "gen_id")] pub id: i64,
   #[serde(default = "default_title")] pub title: String,
@@ -42,6 +46,7 @@ pub struct Article {
   #[serde(default = "default_tags")] pub tags: Vec<String>,
   #[serde(default = "default_created_at")] pub created_at: i64,
   #[serde(default = "default_content")] pub content: String,
+  pub website: Option<Arc<Website>>,
   pub category: Option<String>,
   pub publish_at: Option<String>,
 }
@@ -57,21 +62,24 @@ impl Article {
       content: default_content(),
       category: None,
       publish_at: None,
+      website: None,
     }
   }
 
-  pub fn from_markdown(text: &str) -> Article {
+  pub fn from_markdown(text: &str, website: Arc<Website>) -> Article {
     match find_yaml_block(text) {
       Some((fm_start, fm_end, content_start)) => {
         let matter = &text[fm_start..fm_end];
         let content = &text[content_start..];
         let mut article: Article = serde_yaml::from_str(matter).unwrap();
         article.content = content.into();
+        article.website = Some(website);
         article
       },
       None => {
         let mut article = Article::default();
         article.content = text.into();
+        article.website = Some(website);
         article
       }
     }
