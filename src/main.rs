@@ -23,15 +23,17 @@ extern crate rayon;
 // use chrono::prelude::*;
 
 mod logger;
-mod nanobe {
+mod cmd {
+  pub mod build;
+}
+mod model {
   pub mod website;
   pub mod article;
-  pub mod build;
-  pub mod template;
 }
-
-use nanobe::build::build;
-use nanobe::template::test;
+mod template {
+  pub mod layout;
+  pub mod article;
+}
 
 // Cargo.toml variables for default info
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
@@ -79,10 +81,7 @@ fn main() {
           let src = &m.value_of("SOURCEDIR").unwrap_or("articles");
           let dest = &m.value_of("DESTDIR").unwrap_or("html");
           info!(logger, "building from {} into {}", src, dest);
-          build(src, dest)
-      },
-      ("template", Some(_)) => {
-          test()
+          cmd::build::build(src, dest)
       },
       _ => {}
     }

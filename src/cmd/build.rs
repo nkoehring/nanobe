@@ -6,8 +6,7 @@ use std::io::{Read, BufReader, Error};
 use std::sync::Arc;
 use rayon::prelude::*;
 
-use nanobe::article::Article;
-use nanobe::website::Website;
+use model::website::Website;
 
 
 fn render_file(input_path: &PathBuf, output_dir: &Path, website: Arc<Website>) -> Result<String, Error> {
@@ -18,8 +17,7 @@ fn render_file(input_path: &PathBuf, output_dir: &Path, website: Arc<Website>) -
   let mut buffer = String::new();
 
   let _ = file_reader.read_to_string(&mut buffer);
-  let article = Article::from_markdown(&buffer, website);
-  article.dump(&file_name, output_dir)
+  (*website).render_article(&buffer, &file_name, output_dir)
 }
 
 

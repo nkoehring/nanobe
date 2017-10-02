@@ -12,7 +12,7 @@ homepage = "https://github.com/nkoehring/nanobe"
 
 [dependencies]
 bart = "0.1.4"
-bart_derive = "0.1.4"
+# bart_derive = "0.1.4"
 comrak = "0.1.6"
 slog = "2.0.6"
 sloggers = "0.2.0"
@@ -38,3 +38,8 @@ features = [ "wrap_help", "color" ]
 version = "1.0"
 default-features = true
 features = [ "std", "rc" ]
+
+[dependencies.bart_derive]
+path = "../bart/libs/bart_derive/"
+version = "*"
+
