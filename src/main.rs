@@ -50,7 +50,7 @@ fn main() {
 
     let destination_arg = clap::Arg::with_name("DESTDIR")
         .index(2)
-        .help("html output directory");
+        .help("html/json output directory");
 
     let build_cmd = clap::SubCommand::with_name("build")
         .about("precompile templates manually")
