@@ -10,7 +10,6 @@
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate slog;
 extern crate sloggers;
-extern crate serde;
 extern crate serde_yaml;
 extern crate serde_json;
 extern crate clap;
@@ -24,14 +23,17 @@ extern crate rayon;
 // use chrono::prelude::*;
 
 mod logger;
-mod nanobe {
-  pub mod article;
+mod cmd {
   pub mod build;
-  pub mod template;
 }
-
-use nanobe::build::build;
-use nanobe::template::test;
+mod model {
+  pub mod website;
+  pub mod article;
+}
+mod template {
+  pub mod layout;
+  pub mod article;
+}
 
 // Cargo.toml variables for default info
 const VERSION: Option<&'static str> = option_env!("CARGO_PKG_VERSION");
@@ -48,7 +50,7 @@ fn main() {
 
     let destination_arg = clap::Arg::with_name("DESTDIR")
         .index(2)
-        .help("html output directory");
+        .help("html/json output directory");
 
     let build_cmd = clap::SubCommand::with_name("build")
         .about("precompile templates manually")
@@ -79,10 +81,7 @@ fn main() {
           let src = &m.value_of("SOURCEDIR").unwrap_or("articles");
           let dest = &m.value_of("DESTDIR").unwrap_or("html");
           info!(logger, "building from {} into {}", src, dest);
-          build(src, dest)
-      },
-      ("template", Some(_)) => {
-          test()
+          cmd::build::build(src, dest)
       },
       _ => {}
     }

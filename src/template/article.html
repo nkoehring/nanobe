@@ -1,0 +1,16 @@
+<article>
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+
+  <aside>
+    <p>Category: {{ category }}</p>
+    <ul>
+      {{#tags}}<li>{{ . }}</li>{{/tags}}
+    </ul>
+  </aside>
+
+  <div id="content">
+    {{{ content }}}
+  </div
+</article>
