@@ -1,0 +1,8 @@
+(A) render +articles in subfolder
+(A) render +index in parent of articles subfolder
+(B) +index +json should contain a list of articles with links and meta data, but no content
+(B) +index +html should contain a list of links to articles
+(C) +index could contain an +abstract of each article
+(C) +index +abstract should be +configurable
+(C) +index +html should have +pagination
+(C) +pagination should be +configurable
